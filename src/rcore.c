@@ -504,6 +504,11 @@ typedef struct CoreData {
 #endif
         unsigned int frameCounter;          // Frame counter
     } Time;
+    struct {
+        UserKeyCallback keyCallback;                 // User defined callback for GLFW key events
+        UserMouseButtonCallback mouseButtonCallback; // User defined callback for GLFW mouse button events
+        UserCharCallback charCallback;               // User defined callback for GLFW char events
+    } Callbacks;
 } CoreData;
 
 //----------------------------------------------------------------------------------
@@ -3588,6 +3593,28 @@ void OpenURL(const char *url)
         (*vm)->DetachCurrentThread(vm);
 #endif
     }
+}
+
+//----------------------------------------------------------------------------------
+// User Callbacks for GLFW events
+//----------------------------------------------------------------------------------
+
+// Set user defined callback for key events
+void SetUserKeyCallback(GLFWkeyfun callback)
+{
+    CORE.Callbacks.keyCallback = callback;
+}
+
+// Set user defined callback for mouse button events
+void SetUserMouseButtonCallback(GLFWmousebuttonfun callback)
+{
+    CORE.Callbacks.mouseButtonCallback = callback;
+}
+
+// Set user defined callback for char events
+void SetUserCharCallback(GLFWcharfun callback)
+{
+    CORE.Callbacks.charCallback = callback;
 }
 
 //----------------------------------------------------------------------------------
