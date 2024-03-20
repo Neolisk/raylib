@@ -1712,6 +1712,9 @@ static void KeyCallback(GLFWwindow *window, int key, int scancode, int action, i
 
     // Check the exit key to set close window
     if ((key == CORE.Input.Keyboard.exitKey) && (action == GLFW_PRESS)) glfwSetWindowShouldClose(platform.handle, GLFW_TRUE);
+
+    if (CORE.Callbacks.keyCallback != 0)
+        CORE.Callbacks.keyCallback(key, scancode, action, mods);
 }
 
 // GLFW3 Char Key Callback, runs on key down (gets equivalent unicode char value)
@@ -1731,6 +1734,9 @@ static void CharCallback(GLFWwindow *window, unsigned int key)
         CORE.Input.Keyboard.charPressedQueue[CORE.Input.Keyboard.charPressedQueueCount] = key;
         CORE.Input.Keyboard.charPressedQueueCount++;
     }
+
+    if (CORE.Callbacks.charCallback != 0)
+        CORE.Callbacks.charCallback(key);
 }
 
 // GLFW3 Mouse Button Callback, runs on mouse button pressed
@@ -1766,6 +1772,8 @@ static void MouseButtonCallback(GLFWwindow *window, int button, int action, int 
     // Gesture data is sent to gestures-system for processing
     ProcessGestureEvent(gestureEvent);
 #endif
+    if (CORE.Callbacks.mouseButtonCallback != 0)
+        CORE.Callbacks.mouseButtonCallback(button, action, mods);
 }
 
 // GLFW3 Cursor Position Callback, runs on mouse move

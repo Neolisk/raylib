@@ -1143,6 +1143,18 @@ RLAPI void StopAutomationEventRecording(void);                                  
 RLAPI void PlayAutomationEvent(AutomationEvent event);                                  // Play a recorded automation event
 
 //------------------------------------------------------------------------------------
+// User Defined Input Callbacks (Module: core)
+//------------------------------------------------------------------------------------
+
+typedef void (*UserKeyCallback)(int, int, int, int);        // Type for key event callback
+typedef void (*UserMouseButtonCallback)(int, int, int);     // Type for mouse button event callback
+typedef void (*UserCharCallback)(unsigned int);             // Type for char event callback
+
+RLAPI void SetUserKeyCallback(UserKeyCallback callback);                     // Set user defined callback for key events
+RLAPI void SetUserMouseButtonCallback(UserMouseButtonCallback callback);     // Set user defined callback for mouse button events
+RLAPI void SetUserCharCallback(UserCharCallback callback);                   // Set user defined callback for char events
+
+//------------------------------------------------------------------------------------
 // Input Handling Functions (Module: core)
 //------------------------------------------------------------------------------------
 
