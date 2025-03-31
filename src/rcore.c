@@ -2654,19 +2654,19 @@ void PlayAutomationEvent(AutomationEvent event)
 //----------------------------------------------------------------------------------
 
 // Set user defined callback for key events
-void SetUserKeyCallback(GLFWkeyfun callback)
+void SetUserKeyCallback(UserKeyCallback callback)
 {
     CORE.Callbacks.keyCallback = callback;
 }
 
 // Set user defined callback for mouse button events
-void SetUserMouseButtonCallback(GLFWmousebuttonfun callback)
+void SetUserMouseButtonCallback(UserMouseButtonCallback callback)
 {
     CORE.Callbacks.mouseButtonCallback = callback;
 }
 
 // Set user defined callback for char events
-void SetUserCharCallback(GLFWcharfun callback)
+void SetUserCharCallback(UserCharCallback callback)
 {
     CORE.Callbacks.charCallback = callback;
 }
