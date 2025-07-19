@@ -119,7 +119,7 @@ void android_main(struct android_app *app)
     // Waiting for application events before complete finishing
     while (!app->destroyRequested)
     {
-        while ((pollResult = ALooper_pollAll(0, NULL, &pollEvents, (void **)&platform.source)) >= 0)
+        while ((pollResult = ALooper_pollOnce(0, NULL, &pollEvents, (void **)&platform.source)) >= 0)
         {
             if (platform.source != NULL) platform.source->process(app, platform.source);
         }
@@ -496,7 +496,7 @@ void PollInputEvents(void)
 
     // Poll Events (registered events)
     // NOTE: Activity is paused if not enabled (platform.appEnabled)
-    while ((pollResult = ALooper_pollAll(platform.appEnabled? 0 : -1, NULL, &pollEvents, (void**)&platform.source)) >= 0)
+    while ((pollResult = ALooper_pollOnce(platform.appEnabled? 0 : -1, NULL, &pollEvents, (void**)&platform.source)) >= 0)
     {
         // Process this event
         if (platform.source != NULL) platform.source->process(platform.app, platform.source);
@@ -583,7 +583,7 @@ int InitPlatform(void)
     while (!CORE.Window.ready)
     {
         // Process events loop
-        while ((pollResult = ALooper_pollAll(0, NULL, &pollEvents, (void**)&platform.source)) >= 0)
+        while ((pollResult = ALooper_pollOnce(0, NULL, &pollEvents, (void**)&platform.source)) >= 0)
         {
             // Process this event
             if (platform.source != NULL) platform.source->process(platform.app, platform.source);
